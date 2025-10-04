@@ -23,8 +23,8 @@ var dash_power = DASH_POWER
 var max_dash_cooldown = MAX_DASH_COOLDOWN
 
 
-var mana = 100
-var dash_cooldown = 2
+var mana = max_mana
+var dash_cooldown = max_dash_cooldown
 
 var dashing = false
 var dash_direction = Vector2(1,0)
@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x -= move_speed*delta
 	if Input.is_action_pressed("Move Right"):
 		velocity.x += move_speed*delta
-	# Abilities
+	# Abilitiesd
 
 	if Input.is_action_just_pressed("Dash"):
 		if dash_cooldown == 0:
