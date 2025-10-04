@@ -1,66 +1,94 @@
 extends CharacterBody2D
 
+
+
+# Stats (Constants)
+const MOVE_SPEED = 1600
+const SPEED_LIMIT = 400
+const DRAG = 0.9
+const MAX_MANA = 100
+const MANA_RECHARGE = 20
+const DASH_COST = 25
+const DASH_POWER = 2500
+const MAX_DASH_COOLDOWN = 0.5
+
+# Stats (Dynamic)
+var move_speed = MOVE_SPEED
+var speed_limit = SPEED_LIMIT
+var drag = DRAG
+var max_mana = MAX_MANA
+var mana_recharge = MANA_RECHARGE
+var dash_cost = DASH_COST
+var dash_power = DASH_POWER
+var max_dash_cooldown = MAX_DASH_COOLDOWN
+
+
 var mana = 100
+var dash_cooldown = 2
+
 var dashing = false
-var dash_length = Vector2(1,0)
+var dash_direction = Vector2(1,0)
 @onready var mana_bar = $ManaBar
 #@onready var camera = $Camera2D
 func _physics_process(delta: float) -> void:
 	# Movement
 	if Input.is_action_pressed("Move Up"):
-		velocity.y -= 1600*delta
+		velocity.y -= move_speed*delta
 	if Input.is_action_pressed("Move Down"):
-		velocity.y += 1600*delta
+		velocity.y += move_speed*delta
 	if Input.is_action_pressed("Move Left"):
-		velocity.x -= 1600*delta
+		velocity.x -= move_speed*delta
 	if Input.is_action_pressed("Move Right"):
-		velocity.x += 1600*delta
+		velocity.x += move_speed*delta
 	# Abilities
-	if velocity.length() > 0.01:
-		dash_length = velocity.normalized()
+
 	if Input.is_action_just_pressed("Dash"):
-		if mana >= 25:
-			mana -= 25
-			velocity += 2500*dash_length
-			dashing = true
+		if dash_cooldown == 0:
+			if mana >= dash_cost:
+				dash_cooldown = max_dash_cooldown
+				mana -= dash_cost
+				if velocity.length() > 0.01:
+					dash_direction = velocity.normalized()
+				mana_recharge = 0
+				velocity -= 0.1*dash_power*dash_direction
+				await get_tree().create_timer(0.2).timeout
+				velocity += 1.1*dash_power*dash_direction
+				mana_recharge = MANA_RECHARGE
+				dashing = true
 	# Speed Limit
-	if velocity.x > 400:
+	if velocity.x > speed_limit:
 		if not dashing:
-			velocity.x = 400
-	if velocity.x < -400:
+			velocity.x = speed_limit
+	if velocity.x < -speed_limit:
 		if not dashing:
-			velocity.x = -400
-	if velocity.y > 400:
+			velocity.x = -speed_limit
+	if velocity.y > speed_limit:
 		if not dashing:
-			velocity.y = 400
-	if velocity.y < -400:
+			velocity.y = speed_limit
+	if velocity.y < -speed_limit:
 		if not dashing:
-			velocity.y = -400
+			velocity.y = -speed_limit
+			
 	# Dash Handling 
-	if velocity.length() < 400:
+	if velocity.length() < speed_limit:
 		dashing = false
-	#if dashing:
-		#if dash_length.x > 0:
-			#if dash_length.y > 0:
-				#camera.offset = 0.1*Vector2(max(0, velocity.x-200), max(0, velocity.x+200))
-			#else:
-				#camera.offset = 0.1*Vector2(max(0, velocity.x-200), min(0, velocity.x-200))
-		#else:
-			#if dash_length.y > 0:
-				#camera.offset = 0.1*Vector2(min(0, velocity.x+200), max(0, velocity.x+200))
-			#else:
-				#camera.offset = 0.1*Vector2(min(0, velocity.x+200), min(0, velocity.x-200))
-	#else:
-		#camera.offset = Vector2.ZERO
-		#print(velocity)
+		
 	# Slowing Down
-	velocity *= 0.9
+	velocity *= drag
 	if velocity.is_zero_approx():
 		velocity = Vector2(0, 0)
-	# Mana Handling
-	if mana  < 100:
-		mana += 20 * delta
-	mana_bar.value = (mana/100)*100
+		
+	# Mana and Cooldown Handling
+	if mana < max_mana:
+		mana += mana_recharge * delta
+	mana_bar.value = (mana/max_mana)*100
+	
+	if dash_cooldown > 0:
+		dash_cooldown -= delta
+	else:
+		dash_cooldown = 0
+		
+	# Collision
 	if dashing:
 		var collision = move_and_collide(velocity*delta)
 		if not collision == null:
