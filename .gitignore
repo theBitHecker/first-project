@@ -1,0 +1,26 @@
+# Godot 4+ specific ignores (includes your provided items)
+.godot/
+/android/
+/web/
+/ios/
+
+# Godot general ignores
+.import/
+export_presets.cfg
+*.translation
+
+# Mono/C# specific ignores (if you are using C#)
+# Remove the '#' if you are using C#
+# .mono/
+# **/*.csproj
+# **/*.sln
+# **/*.fsproj
+
+# Build output folders (optional, depending on your setup)
+/bin/
+/built/
+
+# Operating system and editor specific files
+.DS_Store
+Thumbs.db
+.vscode/
