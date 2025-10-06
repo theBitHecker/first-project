@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 					dash_direction = velocity.normalized()
 				mana_recharge = 0
 				velocity -= 0.1*dash_power*dash_direction
-				await get_tree().create_timer(0.2).timeout
+				await get_tree().create_timer(0.1).timeout
 				velocity += 1.1*dash_power*dash_direction
 				mana_recharge = MANA_RECHARGE
 				dashing = true
