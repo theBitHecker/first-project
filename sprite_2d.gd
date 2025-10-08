@@ -8,9 +8,9 @@ const SPEED_LIMIT = 400
 const DRAG = 0.9
 const MAX_MANA = 100
 const MANA_RECHARGE = 20
-const DASH_COST = 25
-const DASH_POWER = 2500
-const MAX_DASH_COOLDOWN = 0.5
+const SPEAR_SPECIAL_COST = 25
+const SPEAR_SPECIAL_POWER = 2500
+const MAX_SPEAR_SPECIAL_COOLDOWN = 0.5
 
 # Stats (Dynamic)
 var move_speed = MOVE_SPEED
@@ -18,13 +18,13 @@ var speed_limit = SPEED_LIMIT
 var drag = DRAG
 var max_mana = MAX_MANA
 var mana_recharge = MANA_RECHARGE
-var dash_cost = DASH_COST
-var dash_power = DASH_POWER
-var max_dash_cooldown = MAX_DASH_COOLDOWN
+var spear_special_cost = SPEAR_SPECIAL_COST
+var spear_special_power = SPEAR_SPECIAL_POWER
+var max_spear_special_cooldown = MAX_SPEAR_SPECIAL_COOLDOWN
 
 
 var mana = max_mana
-var dash_cooldown = max_dash_cooldown
+var spear_special_cooldown = max_spear_special_cooldown
 
 var dashing = false
 var dash_direction = Vector2(1,0)
@@ -43,16 +43,16 @@ func _physics_process(delta: float) -> void:
 	# Abilitiesd
 
 	if Input.is_action_just_pressed("Dash"):
-		if dash_cooldown == 0:
-			if mana >= dash_cost:
-				dash_cooldown = max_dash_cooldown
-				mana -= dash_cost
+		if spear_special_cooldown == 0:
+			if mana >= spear_special_cost:
+				spear_special_cooldown = max_spear_special_cooldown
+				mana -= spear_special_cost
 				if velocity.length() > 0.01:
 					dash_direction = velocity.normalized()
 				mana_recharge = 0
-				velocity -= 0.1*dash_power*dash_direction
+				velocity -= 0.1*spear_special_power*dash_direction
 				await get_tree().create_timer(0.1).timeout
-				velocity += 1.1*dash_power*dash_direction
+				velocity += 1.1*spear_special_power*dash_direction
 				mana_recharge = MANA_RECHARGE
 				dashing = true
 	# Speed Limit
@@ -83,10 +83,10 @@ func _physics_process(delta: float) -> void:
 		mana += mana_recharge * delta
 	mana_bar.value = (mana/max_mana)*100
 	
-	if dash_cooldown > 0:
-		dash_cooldown -= delta
+	if spear_special_cooldown > 0:
+		spear_special_cooldown -= delta
 	else:
-		dash_cooldown = 0
+		spear_special_cooldown = 0
 		
 	# Collision
 	if dashing:
