@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=5 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Script" uid="uid://cvhl0baof2aa4" path="res://camera_2d.gd" id="1_lquwl"]
-[ext_resource type="Texture2D" uid="uid://ckcys3pt550ia" path="res://godot.png" id="2_1bvp3"]
-[ext_resource type="Script" uid="uid://bpfd25flgxvvg" path="res://sprite_2d.gd" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="3_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://dvryfqev44eff" path="res://random_background.jpg" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://chck61d5ws685" path="res://grey_godot.png" id="4_1bvp3"]
 
@@ -17,21 +16,7 @@ script = ExtResource("1_lquwl")
 z_index = -1
 texture = ExtResource("3_h2yge")
 
-[node name="Player" type="CharacterBody2D" parent="."]
-script = ExtResource("2_h2yge")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player"]
-texture = ExtResource("2_1bvp3")
-
-[node name="ManaBar" type="ProgressBar" parent="Player"]
-z_index = 2
-offset_left = -71.0
-offset_top = 78.0
-offset_right = 71.0
-offset_bottom = 105.0
-
-[node name="Collider" type="CollisionPolygon2D" parent="Player"]
-polygon = PackedVector2Array(-50, -64, 50, -64, 59, -59, 64, -50, 64, 50, 59, 59, 50, 64, -50, 64, -59, 59, -64, 50, -64, -50, -59, -59)
+[node name="Player" parent="." instance=ExtResource("3_1bvp3")]
 
 [node name="Block" type="CharacterBody2D" parent="."]
 position = Vector2(-195, 4)

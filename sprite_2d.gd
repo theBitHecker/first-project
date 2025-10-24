@@ -59,40 +59,33 @@ func _physics_process(delta: float) -> void:
 	# Abilities
 	
 	if Input.is_action_pressed("Attack"):
-		if selected_weapon == 0:
-			if pencil_cooldown == 0:
-				if mana >= pencil_cost:
-					pencil_cooldown = max_pencil_cooldown
-					mana -= pencil_cost
-					# code actual stab
+		if selected_weapon == 0 and pencil_cooldown == 0 and mana >= pencil_cost:
+			pencil_cooldown = max_pencil_cooldown
+			mana -= pencil_cost
+			# code actual stab
 		
-	if Input.is_action_just_pressed("Special"):
-		if selected_weapon == 0:
-			if pencil_special_cooldown == 0:
-				if mana >= pencil_special_cost:
-					pencil_special_cooldown = max_pencil_special_cooldown
-					mana -= pencil_special_cost
-					if velocity.length() > 0.01:
-						dash_direction = velocity.normalized()
-					mana_recharge = 0
-					velocity -= 0.1*pencil_special_power*dash_direction
-					await get_tree().create_timer(0.1).timeout
-					velocity += 1.1*pencil_special_power*dash_direction
-					mana_recharge = MANA_RECHARGE
-					penciling = true
+	if Input.is_action_just_pressed("Ability"):
+		if pencil_special_cooldown == 0 and selected_weapon == 0 and mana >= pencil_special_cost:
+			pencil_special_cooldown = max_pencil_special_cooldown
+			mana -= pencil_special_cost
+			if velocity.length() > 0.01:
+				dash_direction = velocity.normalized()
+			mana_recharge = 0
+			velocity -= 0.1*pencil_special_power*dash_direction
+			await get_tree().create_timer(0.1).timeout
+			velocity += 1.1*pencil_special_power*dash_direction
+			mana_recharge = MANA_RECHARGE
+			penciling = true
 	# Speed Limit
-	if velocity.x > speed_limit:
-		if not penciling:
-			velocity.x = speed_limit
-	if velocity.x < -speed_limit:
-		if not penciling:
-			velocity.x = -speed_limit
-	if velocity.y > speed_limit:
-		if not penciling:
-			velocity.y = speed_limit
-	if velocity.y < -speed_limit:
-		if not penciling:
-			velocity.y = -speed_limit
+	
+	if velocity.x > speed_limit and not penciling:
+		velocity.x = speed_limit
+	if velocity.x < -speed_limit and not penciling:
+		velocity.x = -speed_limit
+	if velocity.y > speed_limit and not penciling:
+		velocity.y = speed_limit
+	if velocity.y < -speed_limit and not penciling:
+		velocity.y = -speed_limit
 			
 	# Dash Handling 
 	if velocity.length() < speed_limit:
