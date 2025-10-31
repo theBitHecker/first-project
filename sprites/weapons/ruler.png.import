@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckcys3pt550ia"
-path="res://.godot/imported/godot.png-5e0da45ed3d6786d5794553e04f58a8c.ctex"
+uid="uid://d2wm41n18p4br"
+path="res://.godot/imported/ruler.png-74080caa1a711ed2e3f6019311b1faa2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://godot.png"
-dest_files=["res://.godot/imported/godot.png-5e0da45ed3d6786d5794553e04f58a8c.ctex"]
+source_file="res://sprites/weapons/ruler.png"
+dest_files=["res://.godot/imported/ruler.png-74080caa1a711ed2e3f6019311b1faa2.ctex"]
 
 [params]
 

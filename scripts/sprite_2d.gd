@@ -40,7 +40,7 @@ var pencil_cooldown = max_pencil_cooldown
 var pencil_special_cooldown = max_pencil_special_cooldown
 var ruler_special_cooldown = max_ruler_special_cooldown
 var selected_weapon = 0
-# 0 is Pencil, 1 is Ruler, 2 is Textbook, 3 is Pen, 4 is Sharpener
+# 0 is Pencil, 1 is Ruler, 2 is Textbook ,3 is Stapler, 4 is Pen, 5 is Sharpener
 
 var penciling = false
 var dash_direction = Vector2(1,0)
@@ -48,14 +48,7 @@ var dash_direction = Vector2(1,0)
 #@onready var camera = $Camera2D
 func _physics_process(delta: float) -> void:
 	# Movement
-	if Input.is_action_pressed("Move Up"):
-		velocity.y -= move_speed*delta
-	if Input.is_action_pressed("Move Down"):
-		velocity.y += move_speed*delta
-	if Input.is_action_pressed("Move Left"):
-		velocity.x -= move_speed*delta
-	if Input.is_action_pressed("Move Right"):
-		velocity.x += move_speed*delta
+	velocity += Input.get_vector("Move Left", "Move Right", "Move Up", "Move Down")*move_speed*delta
 	# Abilities
 	
 	if Input.is_action_pressed("Attack"):
@@ -78,14 +71,8 @@ func _physics_process(delta: float) -> void:
 			penciling = true
 	# Speed Limit
 	
-	if velocity.x > speed_limit and not penciling:
-		velocity.x = speed_limit
-	if velocity.x < -speed_limit and not penciling:
-		velocity.x = -speed_limit
-	if velocity.y > speed_limit and not penciling:
-		velocity.y = speed_limit
-	if velocity.y < -speed_limit and not penciling:
-		velocity.y = -speed_limit
+	if not penciling:
+		velocity = velocity.limit_length(speed_limit)
 			
 	# Dash Handling 
 	if velocity.length() < speed_limit:
