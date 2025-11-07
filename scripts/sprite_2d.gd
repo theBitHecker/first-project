@@ -82,6 +82,11 @@ func _physics_process(delta: float) -> void:
 	velocity *= drag
 	if velocity.is_zero_approx():
 		velocity = Vector2(0, 0)
+	# Animation
+	if velocity.length() < 100:
+		$PlayerSprite.play("Idle")
+	else:
+		$PlayerSprite.play("Walking")
 		
 	# Mana and Cooldown Handling
 	if mana < max_mana:
