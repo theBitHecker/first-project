@@ -3,73 +3,58 @@ extends CharacterBody2D
 
 
 # Stats (Weapon-Dynamic)
-const MOVE_SPEED = 1600
-const SPEED_LIMIT = 400
-const DRAG = 0.9
-const MAX_MANA = 100
-const MANA_RECHARGE = 20
-const PENCIL_COST = 0
-const MAX_PENCIL_COOLDOWN = 0.25
-const PENCIL_SPECIAL_COST = 25
-const PENCIL_SPECIAL_POWER = 2500
-const MAX_PENCIL_SPECIAL_COOLDOWN = 0.5
-const RULER_COST = 0
-const MAX_RULER_COOLDOWN = 0.25
-const RULER_SPECIAL_COST = 25
-const RULER_SPECIAL_POWER = 2500
-const MAX_RULER_SPECIAL_COOLDOWN = 0.5
+var move_speed = 1600
+var speed_limit = 400
+var drag = 0.9
+var max_mana = 100
+var mana_recharge = 20
+var pencil_attack_mana_cost = 0
+var pencil_attack_cooldown = 0.25
+var pencil_ability_mana_cost = 25
+var pencil_ability_speed = 2500
+var pencil_ability_cooldown = 0.5
+var ruler_attack_mana_cost = 0
+var ruler_attack_cooldown = 0.25
+var ruler_ability_mana_cost = 25
+var ruler_ability_cooldown = 0.5
 
-# Stats (Used-Dynamic)
-var move_speed = MOVE_SPEED
-var speed_limit = SPEED_LIMIT
-var drag = DRAG
-var max_mana = MAX_MANA
-var mana_recharge = MANA_RECHARGE
-var pencil_cost = PENCIL_COST
-var max_pencil_cooldown = MAX_PENCIL_COOLDOWN
-var pencil_special_cost = PENCIL_SPECIAL_COST
-var pencil_special_power = PENCIL_SPECIAL_POWER
-var max_pencil_special_cooldown = MAX_PENCIL_SPECIAL_COOLDOWN
-var ruler_special_cost = RULER_SPECIAL_COST
-var ruler_special_power = RULER_SPECIAL_POWER
-var max_ruler_special_cooldown = MAX_RULER_SPECIAL_COOLDOWN
+
 
 
 var mana = max_mana
-var pencil_cooldown = max_pencil_cooldown
-var pencil_special_cooldown = max_pencil_special_cooldown
-var ruler_special_cooldown = max_ruler_special_cooldown
+var cooldown = 0
 var selected_weapon = 0
-# 0 is Pencil, 1 is Ruler, 2 is Textbook ,3 is Stapler, 4 is Pen, 5 is Sharpener
+# 0 is Pencil, 1 is Ruler, 2 is Textbook, 3 is Stapler, 4 is Pen, 5 is Sharpener
 
 var penciling = false
-var dash_direction = Vector2(1,0)
+var attack_control_vector = Vector2(1,0)
+
 @onready var mana_bar = $ManaBar
 #@onready var camera = $Camera2D
 func _physics_process(delta: float) -> void:
 	# Movement
 	var movement_control_vector = Input.get_vector("Move Left", "Move Right", "Move Up", "Move Down")
 	velocity += movement_control_vector*move_speed*delta
+	if not (get_global_mouse_position() - position).is_zero_approx():
+		attack_control_vector = (get_global_mouse_position() - position).normalized()
 	
 	# Abilities
 	
 	if Input.is_action_pressed("Attack"):
-		if selected_weapon == 0 and pencil_cooldown == 0 and mana >= pencil_cost:
-			pencil_cooldown = max_pencil_cooldown
-			mana -= pencil_cost
+		if selected_weapon == 0 and cooldown <= 0 and mana >= pencil_attack_mana_cost:
+			cooldown = pencil_attack_cooldown
+			mana -= pencil_attack_mana_cost
 			# code actual stab
 		
 	if Input.is_action_just_pressed("Ability"):
-		if pencil_special_cooldown == 0 and selected_weapon == 0 and mana >= pencil_special_cost:
-			pencil_special_cooldown = max_pencil_special_cooldown
-			mana -= pencil_special_cost
-			if velocity.length() > 0.01:
-				dash_direction = velocity.normalized()
+		if selected_weapon == 0 and cooldown <= 0 and mana >= pencil_ability_mana_cost:
+			cooldown = pencil_ability_cooldown
+			mana -= pencil_ability_mana_cost
 			mana_recharge = 0
-			velocity -= 0.1*pencil_special_power*dash_direction
+			velocity -= 0.1*pencil_ability_speed*attack_control_vector
 			await get_tree().create_timer(0.1).timeout
-			velocity += 1.1*pencil_special_power*dash_direction
-			mana_recharge = MANA_RECHARGE
+			velocity += 1.1*pencil_ability_speed*attack_control_vector
+			mana_recharge = 20
 			penciling = true
 	# Speed Limit
 	
@@ -97,14 +82,9 @@ func _physics_process(delta: float) -> void:
 		mana += mana_recharge * delta
 	mana_bar.value = (mana/max_mana)*100
 	
-	if pencil_cooldown > 0:
-		pencil_cooldown -= delta
-	else:
-		pencil_cooldown = 0
-	if pencil_special_cooldown > 0:
-		pencil_special_cooldown -= delta
-	else:
-		pencil_special_cooldown = 0
+	if cooldown > 0:
+		cooldown -= delta
+		
 		
 	# Collision
 	if penciling:
@@ -113,3 +93,8 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.bounce(collision.get_normal())
 	else:
 		move_and_slide()
+		
+	
+	$Weapon.rotation = attack_control_vector.angle()
+	print(attack_control_vector)
+	
