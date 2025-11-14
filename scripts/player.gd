@@ -48,7 +48,9 @@ var dash_direction = Vector2(1,0)
 #@onready var camera = $Camera2D
 func _physics_process(delta: float) -> void:
 	# Movement
-	velocity += Input.get_vector("Move Left", "Move Right", "Move Up", "Move Down")*move_speed*delta
+	var movement_control_vector = Input.get_vector("Move Left", "Move Right", "Move Up", "Move Down")
+	velocity += movement_control_vector*move_speed*delta
+	
 	# Abilities
 	
 	if Input.is_action_pressed("Attack"):
@@ -83,6 +85,8 @@ func _physics_process(delta: float) -> void:
 	if velocity.is_zero_approx():
 		velocity = Vector2(0, 0)
 	# Animation
+	if not movement_control_vector.is_zero_approx():
+		$PlayerSprite.rotation = lerp_angle($PlayerSprite.rotation, movement_control_vector.angle(), 20*delta)
 	if velocity.length() < 100:
 		$PlayerSprite.play("Idle")
 	else:
