@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crkp8n1e83yxx"
-path="res://.godot/imported/textbook-big.png-5899098a21c74602363a298836e54086.ctex"
+uid="uid://bp604ike220fc"
+path="res://.godot/imported/pen-big.png-dbc1824f1f244c8b09e1e43f44fb1019.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/weapons/textbook-big.png"
-dest_files=["res://.godot/imported/textbook-big.png-5899098a21c74602363a298836e54086.ctex"]
+source_file="res://sprites/weapons/pen-big.png"
+dest_files=["res://.godot/imported/pen-big.png-dbc1824f1f244c8b09e1e43f44fb1019.ctex"]
 
 [params]
 

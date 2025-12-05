@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=11 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Script" uid="uid://bpfd25flgxvvg" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bncaqy7p3i8jq" path="res://sprites/player/walking/pixil-frame-1.png" id="3_1jxqw"]
 [ext_resource type="Texture2D" uid="uid://dfwnwsp7g6e8m" path="res://sprites/weapons/pencil-big.png" id="3_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://bp604ike220fc" path="res://sprites/weapons/pen-big.png" id="4_1jxqw"]
 [ext_resource type="Texture2D" uid="uid://c2latxrmdwmur" path="res://sprites/player/walking/pixil-frame-2.png" id="4_dw050"]
+[ext_resource type="Texture2D" uid="uid://lmk3pm845p3g" path="res://sprites/weapons/ruler-big.png" id="5_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://crkp8n1e83yxx" path="res://sprites/weapons/textbook-big.png" id="6_2hs0m"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n7ghd"]
 load_path = "res://.godot/imported/pixil-frame-0.png-ac7d1d41793e4851b3b3505a3784ebcb.ctex"
@@ -15,7 +18,7 @@ animations = [{
 "texture": ExtResource("3_1jxqw")
 }],
 "loop": true,
-"name": &"Idle",
+"name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -32,7 +35,82 @@ animations = [{
 "texture": ExtResource("3_1jxqw")
 }],
 "loop": true,
-"name": &"Walking",
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b26j0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1jxqw")
+}],
+"loop": true,
+"name": &"pen_ability",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1jxqw")
+}],
+"loop": true,
+"name": &"pen_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i3pqv")
+}],
+"loop": true,
+"name": &"pencil_ability",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i3pqv")
+}],
+"loop": true,
+"name": &"pencil_ability_begin",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i3pqv")
+}],
+"loop": true,
+"name": &"pencil_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2hs0m")
+}],
+"loop": true,
+"name": &"ruler_ability",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2hs0m")
+}],
+"loop": true,
+"name": &"ruler_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_2hs0m")
+}],
+"loop": true,
+"name": &"textbook_ability",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_2hs0m")
+}],
+"loop": true,
+"name": &"textbook_idle",
 "speed": 5.0
 }]
 
@@ -43,7 +121,7 @@ script = ExtResource("1_onrkg")
 position = Vector2(1.000001, 1.000001)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_nvl01")
-animation = &"Walking"
+animation = &"walk"
 
 [node name="ManaBar" type="ProgressBar" parent="."]
 z_index = 2
@@ -57,8 +135,9 @@ polygon = PackedVector2Array(-50, -64, 50, -64, 59, -59, 64, -50, 64, 50, 59, 59
 
 [node name="Weapon" type="Node2D" parent="."]
 
-[node name="WeaponSprite" type="Sprite2D" parent="Weapon"]
+[node name="WeaponSprite" type="AnimatedSprite2D" parent="Weapon"]
 position = Vector2(100, 0)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_i3pqv")
+sprite_frames = SubResource("SpriteFrames_b26j0")
+animation = &"pen_ability"

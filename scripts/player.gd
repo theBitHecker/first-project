@@ -8,6 +8,7 @@ var speed_limit = 400
 var drag = 0.9
 var max_mana = 100
 var mana_recharge = 20
+var switch_mana_cost = 10
 var pencil_attack_mana_cost = 0
 var pencil_attack_cooldown = 0.25
 var pencil_ability_mana_cost = 25
@@ -26,7 +27,7 @@ var cooldown = 0
 var selected_weapon = 0
 # 0 is Pencil, 1 is Ruler, 2 is Textbook, 3 is Stapler, 4 is Pen, 5 is Sharpener
 
-var penciling = false
+var using_ability = false
 var attack_control_vector = Vector2(1,0)
 
 @onready var mana_bar = $ManaBar
@@ -55,15 +56,29 @@ func _physics_process(delta: float) -> void:
 			await get_tree().create_timer(0.1).timeout
 			velocity += 1.1*pencil_ability_speed*attack_control_vector
 			mana_recharge = 20
-			penciling = true
+			using_ability = true
+			
+	# Weapon Selecting
+	if Input.is_action_just_pressed("Weapon 1") and not selected_weapon == 0 and mana >= switch_mana_cost:
+		mana -= switch_mana_cost
+		selected_weapon = 0
+		using_ability = false
+	if Input.is_action_just_pressed("Weapon 2") and not selected_weapon == 1 and mana >= switch_mana_cost:
+		mana -= switch_mana_cost
+		selected_weapon = 1
+		using_ability = false
+	if Input.is_action_just_pressed("Weapon 3") and not selected_weapon == 2 and mana >= switch_mana_cost:
+		mana -= switch_mana_cost
+		selected_weapon = 2
+		using_ability = false
 	# Speed Limit
 	
-	if not penciling:
+	if not (using_ability and selected_weapon == 0):
 		velocity = velocity.limit_length(speed_limit)
 			
 	# Dash Handling 
 	if velocity.length() < speed_limit:
-		penciling = false
+		using_ability = false
 		
 	# Slowing Down
 	velocity *= drag
@@ -73,10 +88,28 @@ func _physics_process(delta: float) -> void:
 	if not movement_control_vector.is_zero_approx():
 		$PlayerSprite.rotation = lerp_angle($PlayerSprite.rotation, movement_control_vector.angle(), 20*delta)
 	if velocity.length() < 100:
-		$PlayerSprite.play("Idle")
+		$PlayerSprite.play("idle")
 	else:
-		$PlayerSprite.play("Walking")
+		$PlayerSprite.play("walk")
 		
+	$Weapon.rotation = attack_control_vector.angle()
+	if selected_weapon == 0:
+		if using_ability:
+			$Weapon/WeaponSprite.play("pencil_ability")
+		else:
+			$Weapon/WeaponSprite.play("pencil_idle")
+	if selected_weapon == 1:
+		if using_ability:
+			$Weapon/WeaponSprite.play("ruler_ability")
+		else:
+			$Weapon/WeaponSprite.play("ruler_idle")
+	if selected_weapon == 2:
+		if using_ability:
+			$Weapon/WeaponSprite.play("textbook_ability")
+		else:
+			$Weapon/WeaponSprite.play("textbook_idle")
+	
+
 	# Mana and Cooldown Handling
 	if mana < max_mana:
 		mana += mana_recharge * delta
@@ -87,7 +120,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 	# Collision
-	if penciling:
+	if using_ability and selected_weapon == 0:
 		var collision = move_and_collide(velocity*delta)
 		if not collision == null:
 			velocity = velocity.bounce(collision.get_normal())
@@ -95,6 +128,6 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		
 	
-	$Weapon.rotation = attack_control_vector.angle()
-	print(attack_control_vector)
+
+
 	
