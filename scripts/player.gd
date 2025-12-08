@@ -36,8 +36,8 @@ func _physics_process(delta: float) -> void:
 	# Movement
 	var movement_control_vector = Input.get_vector("Move Left", "Move Right", "Move Up", "Move Down")
 	velocity += movement_control_vector*move_speed*delta
-	if not (get_global_mouse_position() - position).is_zero_approx():
-		attack_control_vector = (get_global_mouse_position() - position).normalized()
+	if not (get_global_mouse_position() - $"../Camera2D".position).is_zero_approx():
+		attack_control_vector = (get_global_mouse_position() - $"../Camera2D".position).normalized()
 	
 	# Abilities
 	
@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 			mana -= pencil_ability_mana_cost
 			mana_recharge = 0
 			velocity -= 0.1*pencil_ability_speed*attack_control_vector
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.2).timeout
 			velocity += 1.1*pencil_ability_speed*attack_control_vector
 			mana_recharge = 20
 			using_ability = true
@@ -122,10 +122,14 @@ func _physics_process(delta: float) -> void:
 	# Collision
 	if using_ability and selected_weapon == 0:
 		var collision = move_and_collide(velocity*delta)
-		if not collision == null:
+		if collision:
+			var collider = collision.get_collider()
+			if collider is CharacterBody2D:
+				collider.velocity += velocity
 			velocity = velocity.bounce(collision.get_normal())
 	else:
 		move_and_slide()
+	print(using_ability)
 		
 	
 

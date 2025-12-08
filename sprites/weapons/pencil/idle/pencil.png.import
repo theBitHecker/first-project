@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp604ike220fc"
-path="res://.godot/imported/pen-big.png-dbc1824f1f244c8b09e1e43f44fb1019.ctex"
+uid="uid://dfwnwsp7g6e8m"
+path="res://.godot/imported/pencil.png-f90856a59e83133903609de9a55e37da.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/weapons/pen-big.png"
-dest_files=["res://.godot/imported/pen-big.png-dbc1824f1f244c8b09e1e43f44fb1019.ctex"]
+source_file="res://sprites/weapons/pencil/idle/pencil.png"
+dest_files=["res://.godot/imported/pencil.png-f90856a59e83133903609de9a55e37da.ctex"]
 
 [params]
 

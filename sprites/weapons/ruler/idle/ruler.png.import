@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcbnoujkelu6"
-path="res://.godot/imported/textbook.png-19f627dbfed61f10fc829f7ac1622fd9.ctex"
+uid="uid://lmk3pm845p3g"
+path="res://.godot/imported/ruler.png-c7e4e31fa9869aaacc56743597066491.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/weapons/textbook.png"
-dest_files=["res://.godot/imported/textbook.png-19f627dbfed61f10fc829f7ac1622fd9.ctex"]
+source_file="res://sprites/weapons/ruler/idle/ruler.png"
+dest_files=["res://.godot/imported/ruler.png-c7e4e31fa9869aaacc56743597066491.ctex"]
 
 [params]
 

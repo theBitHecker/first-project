@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2wm41n18p4br"
-path="res://.godot/imported/ruler.png-74080caa1a711ed2e3f6019311b1faa2.ctex"
+uid="uid://bp604ike220fc"
+path="res://.godot/imported/pen.png-e1d5ff9772578d87e9fd5377f3a0e22e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/weapons/ruler.png"
-dest_files=["res://.godot/imported/ruler.png-74080caa1a711ed2e3f6019311b1faa2.ctex"]
+source_file="res://sprites/weapons/pen/idle/pen.png"
+dest_files=["res://.godot/imported/pen.png-e1d5ff9772578d87e9fd5377f3a0e22e.ctex"]
 
 [params]
 
