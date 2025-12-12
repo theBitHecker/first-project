@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=13 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Script" uid="uid://bpfd25flgxvvg" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bncaqy7p3i8jq" path="res://sprites/player/walking/pixil-frame-1.png" id="3_1jxqw"]
@@ -114,6 +114,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dw050"]
+size = Vector2(192, 30)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jxqw"]
 size = Vector2(94.5, 76)
 
@@ -127,13 +130,6 @@ scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_nvl01")
 animation = &"walk"
 
-[node name="ManaBar" type="ProgressBar" parent="."]
-z_index = 2
-offset_left = -71.0
-offset_top = 78.0
-offset_right = 71.0
-offset_bottom = 105.0
-
 [node name="Weapon" type="Node2D" parent="."]
 
 [node name="WeaponSprite" type="AnimatedSprite2D" parent="Weapon"]
@@ -141,7 +137,13 @@ position = Vector2(100, 0)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_b26j0")
-animation = &"pen_ability"
+animation = &"pencil_idle"
+
+[node name="Area2D" type="Area2D" parent="Weapon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/Area2D"]
+position = Vector2(95, 0)
+shape = SubResource("RectangleShape2D_dw050")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1jxqw")

@@ -30,14 +30,16 @@ var selected_weapon = 0
 var using_ability = false
 var attack_control_vector = Vector2(1,0)
 
-@onready var mana_bar = $ManaBar
-#@onready var camera = $Camera2D
+@export var mana_bar: TextureProgressBar
+
+
 func _physics_process(delta: float) -> void:
 	# Movement
 	var movement_control_vector = Input.get_vector("Move Left", "Move Right", "Move Up", "Move Down")
 	velocity += movement_control_vector*move_speed*delta
 	if not (get_global_mouse_position() - $"../Camera2D".position).is_zero_approx():
-		attack_control_vector = (get_global_mouse_position() - $"../Camera2D".position).normalized()
+		if not(using_ability and selected_weapon == 0):
+			attack_control_vector = (get_global_mouse_position() - $"../Camera2D".position).normalized()
 	
 	# Abilities
 	
@@ -113,6 +115,8 @@ func _physics_process(delta: float) -> void:
 	# Mana and Cooldown Handling
 	if mana < max_mana:
 		mana += mana_recharge * delta
+		
+	
 	mana_bar.value = (mana/max_mana)*100
 	
 	if cooldown > 0:
