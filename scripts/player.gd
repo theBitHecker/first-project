@@ -43,22 +43,11 @@ func _physics_process(delta: float) -> void:
 	
 	# Abilities
 	
-	if Input.is_action_pressed("Attack"):
-		if selected_weapon == 0 and cooldown <= 0 and mana >= pencil_attack_mana_cost:
-			cooldown = pencil_attack_cooldown
-			mana -= pencil_attack_mana_cost
-			# code actual stab
+	if Input.is_action_just_pressed("Attack"):
+		attack(delta)
 		
 	if Input.is_action_just_pressed("Ability"):
-		if selected_weapon == 0 and cooldown <= 0 and mana >= pencil_ability_mana_cost:
-			cooldown = pencil_ability_cooldown
-			mana -= pencil_ability_mana_cost
-			mana_recharge = 0
-			velocity -= 0.1*pencil_ability_speed*attack_control_vector
-			await get_tree().create_timer(0.2).timeout
-			velocity += 1.1*pencil_ability_speed*attack_control_vector
-			mana_recharge = 20
-			using_ability = true
+		ability(delta)
 			
 	# Weapon Selecting
 	if Input.is_action_just_pressed("Weapon 1") and not selected_weapon == 0 and mana >= switch_mana_cost:
@@ -134,7 +123,27 @@ func _physics_process(delta: float) -> void:
 	else:
 		move_and_slide()
 	print(using_ability)
+	
+func attack(_delta):
+	if selected_weapon == 0 and cooldown <= 0 and mana >= pencil_attack_mana_cost:
+		cooldown = pencil_attack_cooldown
+		mana -= pencil_attack_mana_cost
+		# code actual stab
+
+func ability(_delta):
+	if selected_weapon == 0 and cooldown <= 0 and mana >= pencil_ability_mana_cost:
+		cooldown = pencil_ability_cooldown
+		mana -= pencil_ability_mana_cost
+		mana_recharge = 0
+		velocity -= 0.1*pencil_ability_speed*attack_control_vector
 		
+		
+		await get_tree().create_timer(0.2).timeout
+		velocity += 1.1*pencil_ability_speed*attack_control_vector
+		mana_recharge = 20
+		using_ability = true
+	
+
 	
 
 
