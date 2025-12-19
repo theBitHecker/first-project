@@ -55,3 +55,23 @@ texture_progress = SubResource("GradientTexture2D_272bh")
 tint_under = Color(1, 1, 0.2, 1)
 tint_over = Color(1, 0, 1, 1)
 tint_progress = Color(0, 0.49803922, 1, 1)
+
+[node name="HealthBar" type="TextureProgressBar" parent="UILayer"]
+z_index = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -74.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+value = 60.0
+texture_under = SubResource("GradientTexture2D_lquwl")
+texture_progress = SubResource("GradientTexture2D_272bh")
+tint_under = Color(1, 1, 0.2, 1)
+tint_over = Color(1, 0, 1, 1)
+tint_progress = Color(0.87305015, 0, 0.15750521, 1)
