@@ -124,7 +124,7 @@ func _physics_process(delta: float) -> void:
 		mana += mana_recharge * delta
 		
 	
-	mana_bar.value = (mana/max_mana)*100
+	mana_bar.value = remap(mana, 0, max_mana, mana_bar.min_value, mana_bar.max_value)
 	
 	if cooldown > 0:
 		cooldown -= delta
