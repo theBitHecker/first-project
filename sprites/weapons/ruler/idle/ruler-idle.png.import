@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://capyhgt0v5mpb"
-path="res://.godot/imported/mana-bar-progress.png-dfb0c2a3138f6c84b85a7abc1e20a42c.ctex"
+uid="uid://lmk3pm845p3g"
+path="res://.godot/imported/ruler-idle.png-4c9ec90ddf92b31f0087639da947b552.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/mana-bar-progress.png"
-dest_files=["res://.godot/imported/mana-bar-progress.png-dfb0c2a3138f6c84b85a7abc1e20a42c.ctex"]
+source_file="res://sprites/weapons/ruler/idle/ruler-idle.png"
+dest_files=["res://.godot/imported/ruler-idle.png-4c9ec90ddf92b31f0087639da947b552.ctex"]
 
 [params]
 

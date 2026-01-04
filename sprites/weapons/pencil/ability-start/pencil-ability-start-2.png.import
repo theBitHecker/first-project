@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crkp8n1e83yxx"
-path="res://.godot/imported/textbook.png-70fad7f2c9175e653d0de4509809dbd1.ctex"
+uid="uid://0apmlosd2i5x"
+path="res://.godot/imported/pencil-ability-start-2.png-8cbb284494cf2e3c02820202c85f04c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/weapons/textbook/idle/textbook.png"
-dest_files=["res://.godot/imported/textbook.png-70fad7f2c9175e653d0de4509809dbd1.ctex"]
+source_file="res://sprites/weapons/pencil/ability-start/pencil-ability-start-2.png"
+dest_files=["res://.godot/imported/pencil-ability-start-2.png-8cbb284494cf2e3c02820202c85f04c1.ctex"]
 
 [params]
 

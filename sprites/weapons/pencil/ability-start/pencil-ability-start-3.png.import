@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://capyhgt0v5mpb"
-path="res://.godot/imported/mana-bar-progress.png-dfb0c2a3138f6c84b85a7abc1e20a42c.ctex"
+uid="uid://bgqxhgeh1ugls"
+path="res://.godot/imported/pencil-ability-start-3.png-55a72e7b17f5bb56334b7bda72c06e08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/mana-bar-progress.png"
-dest_files=["res://.godot/imported/mana-bar-progress.png-dfb0c2a3138f6c84b85a7abc1e20a42c.ctex"]
+source_file="res://sprites/weapons/pencil/ability-start/pencil-ability-start-3.png"
+dest_files=["res://.godot/imported/pencil-ability-start-3.png-55a72e7b17f5bb56334b7bda72c06e08.ctex"]
 
 [params]
 

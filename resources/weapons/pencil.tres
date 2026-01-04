@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PencilData" load_steps=2 format=3 uid="uid://dhqjxp4nvjvpu"]
+
+[ext_resource type="Script" uid="uid://blm75f3tw4jum" path="res://scripts/weapon-data/pencil-data.gd" id="1_rnu1i"]
+
+[resource]
+script = ExtResource("1_rnu1i")
+dash_speed = 4000.0
+name = "Pencil"
+animations = {
+"ability": "pencil_ability",
+"ability_begin": "pencil_ability_begin",
+"ability_end": "pencil_ability_end",
+"attack": "pencil_idle",
+"idle": "pencil_idle"
+}
+ability_mana_cost = 15
+attack_cooldown = 0.25
+ability_cooldown = 1.25
+metadata/_custom_type_script = "uid://blm75f3tw4jum"

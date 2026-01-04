@@ -7,7 +7,7 @@ var move_speed = 1600
 var speed_limit = 400
 var drag = 0.9
 var max_mana = 100
-var mana_recharge = 20
+var mana_recharge = 10
 var switch_mana_cost = 10
 var pencil_attack_mana_cost = 0
 var pencil_attack_cooldown = 0.25
@@ -20,24 +20,22 @@ var ruler_ability_mana_cost = 25
 var ruler_ability_cooldown = 0.5
 
 
-enum weapons {
-	PENCIL, 
-	RULER,
-	TEXTBOOK,
-	PEN
-} 
 enum weapon_states {
 	IDLE,
 	ATTACK,
-	ATTACK_START,
+	ATTACK_BEGIN,
 	ATTACK_END,
 	ABILITY,
-	ABILITY_START,
+	ABILITY_BEGIN,
 	ABILITY_END
 }
 
+@export var weapons: Dictionary = {
+}
+var selected_weapon: WeaponData
+func _ready():
+	selected_weapon = weapons["Pencil"]
 
-var selected_weapon = weapons.PENCIL
 var weapon_state = weapon_states.IDLE
 
 var mana = max_mana
@@ -55,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	var movement_control_vector = Input.get_vector("Move Left", "Move Right", "Move Up", "Move Down")
 	velocity += movement_control_vector*move_speed*delta
 	if not (get_global_mouse_position() - $"../Camera2D".position).is_zero_approx():
-		if not(weapon_state == weapon_states.ABILITY and selected_weapon == 0):
+		if not(weapon_state == weapon_states.ABILITY and selected_weapon.name == "Pencil"):
 			attack_control_vector = (get_global_mouse_position() - $"../Camera2D".position).normalized()
 	
 	# Abilities
@@ -67,27 +65,28 @@ func _physics_process(delta: float) -> void:
 		#ability(delta)
 			#
 	# Weapon Selecting
-	if Input.is_action_just_pressed("Weapon 1") and not selected_weapon == weapons.PENCIL and mana >= switch_mana_cost:
+	if Input.is_action_just_pressed("Weapon 1") and not selected_weapon.name == "Pencil" and mana >= switch_mana_cost:
 		mana -= switch_mana_cost
-		selected_weapon = weapons.PENCIL
+		selected_weapon = weapons["Pencil"]
 		weapon_state = weapon_states.IDLE
-	if Input.is_action_just_pressed("Weapon 2") and not selected_weapon == weapons.RULER and mana >= switch_mana_cost:
+	if Input.is_action_just_pressed("Weapon 2") and not selected_weapon.name == "Ruler" and mana >= switch_mana_cost:
 		mana -= switch_mana_cost
-		selected_weapon = weapons.RULER
+		selected_weapon = weapons["Ruler"]
 		weapon_state = weapon_states.IDLE
-	if Input.is_action_just_pressed("Weapon 3") and not selected_weapon == weapons.TEXTBOOK and mana >= switch_mana_cost:
+	if Input.is_action_just_pressed("Weapon 3") and not selected_weapon.name == "Textbook" and mana >= switch_mana_cost:
 		mana -= switch_mana_cost
-		selected_weapon = weapons.TEXTBOOK
+		selected_weapon = weapons["Textbook"]
 		weapon_state = weapon_states.IDLE
 	# Speed Limit
 	
-	if not (selected_weapon == 0 and weapon_state == weapon_states.ABILITY):
+	if not (selected_weapon.name == "Pencil" and weapon_state == weapon_states.ABILITY):
 		velocity = velocity.limit_length(speed_limit)
 			
 	# Dash Handling 
-	if velocity.length() < speed_limit:
+	if (cooldown <= 0.5) and weapon_state == weapon_states.ABILITY and selected_weapon.name == "Pencil":
 		weapon_state = weapon_states.ABILITY_END
-		
+	if cooldown <= 0.25 and selected_weapon.name == "Pencil" and weapon_state == weapon_states.ABILITY_END:
+		weapon_state = weapon_states.IDLE
 	# Slowing Down
 	velocity *= drag
 	if velocity.is_zero_approx():
@@ -134,30 +133,23 @@ func _physics_process(delta: float) -> void:
 func _input(event):
 	if event.is_action_pressed("Attack"):
 		attack_script()
-		
 	if event.is_action_pressed("Ability"):
 		ability_script()
-		
+
 func attack_script():
-	if selected_weapon == 0 and cooldown <= 0 and mana >= pencil_attack_mana_cost:
-		cooldown = pencil_attack_cooldown
-		mana -= pencil_attack_mana_cost
-		# code actual stab
+	if cooldown <= 0 and mana >= selected_weapon.attack_mana_cost:
+		cooldown = selected_weapon.attack_cooldown
+		mana -= selected_weapon.attack_mana_cost
+		selected_weapon.execute_attack(self)
 
 func ability_script():
-	if selected_weapon == 0 and cooldown <= 0 and mana >= pencil_ability_mana_cost:
-		weapon_state = weapon_states.ABILITY_START
-		cooldown = pencil_ability_cooldown
-		mana -= pencil_ability_mana_cost
-		mana_recharge = 0
-		velocity -= 0.1*pencil_ability_speed*attack_control_vector
-		await get_tree().create_timer(0.2).timeout
-		velocity += 1.1*pencil_ability_speed*attack_control_vector
-		mana_recharge = 20
-		weapon_state = weapon_states.ABILITY
+	if cooldown <= 0 and mana >= selected_weapon.ability_mana_cost:
+		cooldown = selected_weapon.ability_cooldown
+		mana -= selected_weapon.ability_mana_cost
+		selected_weapon.execute_ability(self)
 
 func collision_script(delta):
-	if weapon_state == weapon_states.ABILITY and selected_weapon == weapons.PENCIL:
+	if weapon_state == weapon_states.ABILITY and selected_weapon.name == "Pencil":
 		var collision = move_and_collide(velocity*delta)
 		if collision:
 			var collider = collision.get_collider()
@@ -168,19 +160,19 @@ func collision_script(delta):
 		move_and_slide()
 
 func weapon_animation():
-	match [selected_weapon, weapon_state]:
-		[weapons.PENCIL, weapon_states.IDLE]:
-			$Weapon/WeaponSprite.play("pencil_idle")
-		[weapons.PENCIL, weapon_states.ATTACK]:
-			$Weapon/WeaponSprite.play("pencil_idle")
-		[weapons.PENCIL, weapon_states.ABILITY_START]:
-			$Weapon/WeaponSprite.play("pencil_ability_begin")
-		[weapons.PENCIL, weapon_states.ABILITY]:
-			$Weapon/WeaponSprite.play("pencil_ability")
-		[weapons.PENCIL, weapon_states.ABILITY_END]:
-			$Weapon/WeaponSprite.play("pencil_idle")
-		[weapons.RULER, weapon_states.IDLE]:
-			$Weapon/WeaponSprite.play("pencil_idle")
+
+	match [weapon_state]:
+		[weapon_states.IDLE]:
+			$Weapon/WeaponSprite.play(selected_weapon.animations["idle"])
+		[weapon_states.ATTACK]:
+			$Weapon/WeaponSprite.play(selected_weapon.animations["attack"])
+		[weapon_states.ABILITY_BEGIN]:
+			$Weapon/WeaponSprite.play(selected_weapon.animations["ability_begin"])
+		[weapon_states.ABILITY]:
+			$Weapon/WeaponSprite.play(selected_weapon.animations["ability"])
+		[weapon_states.ABILITY_END]:
+			$Weapon/WeaponSprite.play(selected_weapon.animations["ability_end"])
+
 
 		
 		

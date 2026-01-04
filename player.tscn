@@ -1,12 +1,30 @@
-[gd_scene load_steps=13 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=31 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Script" uid="uid://bpfd25flgxvvg" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bncaqy7p3i8jq" path="res://sprites/player/walking/pixil-frame-1.png" id="3_1jxqw"]
-[ext_resource type="Texture2D" uid="uid://dfwnwsp7g6e8m" path="res://sprites/weapons/pencil/idle/pencil.png" id="3_i3pqv"]
-[ext_resource type="Texture2D" uid="uid://bp604ike220fc" path="res://sprites/weapons/pen/idle/pen.png" id="4_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://dfwnwsp7g6e8m" path="res://sprites/weapons/pencil/idle/pencil-idle.png" id="3_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://cs0amvm2fuxom" path="res://sprites/weapons/pen/idle/pen-idle.png" id="4_1jxqw"]
 [ext_resource type="Texture2D" uid="uid://c2latxrmdwmur" path="res://sprites/player/walking/pixil-frame-2.png" id="4_dw050"]
-[ext_resource type="Texture2D" uid="uid://lmk3pm845p3g" path="res://sprites/weapons/ruler/idle/ruler.png" id="5_2hs0m"]
-[ext_resource type="Texture2D" uid="uid://crkp8n1e83yxx" path="res://sprites/weapons/textbook/idle/textbook.png" id="6_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://lmk3pm845p3g" path="res://sprites/weapons/ruler/idle/ruler-idle.png" id="5_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://3ql55wgx75tf" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-0.png" id="5_op7ga"]
+[ext_resource type="Texture2D" uid="uid://cojju6i6t37p1" path="res://sprites/weapons/pencil/ability/pencil-ability-0.png" id="5_pbfsw"]
+[ext_resource type="Texture2D" uid="uid://ckr4bsrw0dy6o" path="res://sprites/weapons/textbook/idle/textbook-idle.png" id="6_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://bflx1f0pe1no7" path="res://sprites/weapons/pencil/ability/pencil-ability-1.png" id="6_5tmop"]
+[ext_resource type="Texture2D" uid="uid://btc6fuvq8x47p" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-1.png" id="6_q13i1"]
+[ext_resource type="Texture2D" uid="uid://dkv2cvbdbuho" path="res://sprites/weapons/pencil/ability/pencil-ability-2.png" id="7_7ahtn"]
+[ext_resource type="Texture2D" uid="uid://0apmlosd2i5x" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-2.png" id="7_pylmc"]
+[ext_resource type="Texture2D" uid="uid://bgqxhgeh1ugls" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-3.png" id="8_pbfsw"]
+[ext_resource type="Texture2D" uid="uid://3vktk3uw785b" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-4.png" id="9_5tmop"]
+[ext_resource type="Texture2D" uid="uid://ia5q0i6gdauw" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-5.png" id="10_7ahtn"]
+[ext_resource type="Texture2D" uid="uid://cm5xaysiry8hv" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-6.png" id="11_7lmhl"]
+[ext_resource type="Texture2D" uid="uid://dqdhc6yq24og" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-7.png" id="12_dx0e4"]
+[ext_resource type="Texture2D" uid="uid://dj8rtgv01daro" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-8.png" id="13_jm5j8"]
+[ext_resource type="Texture2D" uid="uid://c4w7rc6vyq2o6" path="res://sprites/weapons/pencil/ability-start/pencil-ability-start-9.png" id="14_7hik5"]
+[ext_resource type="Texture2D" uid="uid://canc1d1xod5bn" path="res://sprites/weapons/pencil/ability-end/pencil-ability-end-0.png" id="18_jm5j8"]
+[ext_resource type="Texture2D" uid="uid://cir8dwwll7367" path="res://sprites/weapons/pencil/ability-end/pencil-ability-end-1.png" id="19_7hik5"]
+[ext_resource type="Texture2D" uid="uid://b1fgr5yuqrfcy" path="res://sprites/weapons/pencil/ability-end/pencil-ability-end-2.png" id="20_qtqh7"]
+[ext_resource type="Texture2D" uid="uid://cmod4outqdas1" path="res://sprites/weapons/pencil/ability-end/pencil-ability-end-3.png" id="21_2wuci"]
+[ext_resource type="Texture2D" uid="uid://bg4nw70xcv2b8" path="res://sprites/weapons/pencil/ability-end/pencil-ability-end-4.png" id="22_iruf7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n7ghd"]
 load_path = "res://.godot/imported/pixil-frame-0.png-ac7d1d41793e4851b3b3505a3784ebcb.ctex"
@@ -41,10 +59,7 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b26j0"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_1jxqw")
-}],
+"frames": [],
 "loop": true,
 "name": &"pen_ability",
 "speed": 5.0
@@ -59,19 +74,72 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_i3pqv")
+"texture": ExtResource("5_pbfsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5tmop")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7ahtn")
 }],
 "loop": true,
 "name": &"pencil_ability",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_i3pqv")
+"texture": ExtResource("5_op7ga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q13i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pylmc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pbfsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_5tmop")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_7ahtn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7lmhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_dx0e4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jm5j8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7hik5")
 }],
 "loop": true,
 "name": &"pencil_ability_begin",
-"speed": 5.0
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_jm5j8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_7hik5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_qtqh7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_2wuci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_iruf7")
+}],
+"loop": true,
+"name": &"pencil_ability_end",
+"speed": 19.9
 }, {
 "frames": [{
 "duration": 1.0,
@@ -81,10 +149,7 @@ animations = [{
 "name": &"pencil_idle",
 "speed": 5.0
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_2hs0m")
-}],
+"frames": [],
 "loop": true,
 "name": &"ruler_ability",
 "speed": 5.0
@@ -97,10 +162,7 @@ animations = [{
 "name": &"ruler_idle",
 "speed": 5.0
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_2hs0m")
-}],
+"frames": [],
 "loop": true,
 "name": &"textbook_ability",
 "speed": 5.0
@@ -137,7 +199,8 @@ position = Vector2(100, 0)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_b26j0")
-animation = &"pencil_idle"
+animation = &"pencil_ability_end"
+frame_progress = 0.736664
 
 [node name="Area2D" type="Area2D" parent="Weapon"]
 
