@@ -87,6 +87,8 @@ func _physics_process(delta: float) -> void:
 		weapon_state = weapon_states.ABILITY_END
 	if cooldown <= 0.25 and selected_weapon.name == "Pencil" and weapon_state == weapon_states.ABILITY_END:
 		weapon_state = weapon_states.IDLE
+	if cooldown <= 0.01 and selected_weapon.name == "Pencil" and weapon_state == weapon_states.ATTACK:
+		weapon_state = weapon_states.IDLE
 	# Slowing Down
 	velocity *= drag
 	if velocity.is_zero_approx():

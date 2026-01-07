@@ -7,8 +7,8 @@ class_name PencilData
 @export var ability_offset: Vector2
 
 
-func execute_attack(_player: CharacterBody2D):
-	pass
+func execute_attack(player: CharacterBody2D):
+	player.weapon_state = player.weapon_states.ATTACK
 	# code actual stab
 
 func execute_ability(player: CharacterBody2D):
