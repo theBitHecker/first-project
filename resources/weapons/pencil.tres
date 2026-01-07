@@ -10,10 +10,10 @@ animations = {
 "ability": "pencil_ability",
 "ability_begin": "pencil_ability_begin",
 "ability_end": "pencil_ability_end",
-"attack": "pencil_idle",
+"attack": "pencil_attack",
 "idle": "pencil_idle"
 }
 ability_mana_cost = 15
 attack_cooldown = 0.25
-ability_cooldown = 1.25
+ability_cooldown = 1.15
 metadata/_custom_type_script = "uid://blm75f3tw4jum"
