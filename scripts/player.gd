@@ -69,26 +69,21 @@ func _physics_process(delta: float) -> void:
 		mana -= switch_mana_cost
 		selected_weapon = weapons["Pencil"]
 		weapon_state = weapon_states.IDLE
-	if Input.is_action_just_pressed("Weapon 2") and not selected_weapon.name == "Ruler" and mana >= switch_mana_cost:
-		mana -= switch_mana_cost
-		selected_weapon = weapons["Ruler"]
-		weapon_state = weapon_states.IDLE
-	if Input.is_action_just_pressed("Weapon 3") and not selected_weapon.name == "Textbook" and mana >= switch_mana_cost:
-		mana -= switch_mana_cost
-		selected_weapon = weapons["Textbook"]
-		weapon_state = weapon_states.IDLE
+	#if Input.is_action_just_pressed("Weapon 2") and not selected_weapon.name == "Ruler" and mana >= switch_mana_cost:
+		#mana -= switch_mana_cost
+		#selected_weapon = weapons["Ruler"]
+		#weapon_state = weapon_states.IDLE
+	#if Input.is_action_just_pressed("Weapon 3") and not selected_weapon.name == "Textbook" and mana >= switch_mana_cost:
+		#mana -= switch_mana_cost
+		#selected_weapon = weapons["Textbook"]
+		#weapon_state = weapon_states.IDLE
 	# Speed Limit
 	
 	if not (selected_weapon.name == "Pencil" and weapon_state == weapon_states.ABILITY):
 		velocity = velocity.limit_length(speed_limit)
 			
 	# Dash Handling 
-	if (cooldown <= 0.5) and weapon_state == weapon_states.ABILITY and selected_weapon.name == "Pencil":
-		weapon_state = weapon_states.ABILITY_END
-	if cooldown <= 0.25 and selected_weapon.name == "Pencil" and weapon_state == weapon_states.ABILITY_END:
-		weapon_state = weapon_states.IDLE
-	if cooldown <= 0.01 and selected_weapon.name == "Pencil" and weapon_state == weapon_states.ATTACK:
-		weapon_state = weapon_states.IDLE
+	selected_weapon.weapon_state_change(self)
 	# Slowing Down
 	velocity *= drag
 	if velocity.is_zero_approx():
@@ -176,5 +171,5 @@ func weapon_animation():
 			$Weapon/WeaponSprite.play(selected_weapon.animations["ability_end"])
 
 
-		
-		
+func _on_weapon_hitbox_entered(body: Node2D) -> void:
+	selected_weapon.on_weapon_hit(self, body)

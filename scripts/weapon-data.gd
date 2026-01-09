@@ -23,5 +23,11 @@ func execute_attack(_player: CharacterBody2D):
 
 func execute_ability(_player: CharacterBody2D):
 	pass
+
+func weapon_state_change(_player: CharacterBody2D):
+	pass
+
+func on_weapon_hit(_player: CharacterBody2D, _body: Node2D):
+	pass
 	
 	

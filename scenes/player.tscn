@@ -252,3 +252,5 @@ shape = SubResource("RectangleShape2D_dw050")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1jxqw")
+
+[connection signal="body_entered" from="Weapon/Area2D" to="." method="_on_weapon_hitbox_entered"]
