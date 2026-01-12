@@ -13,10 +13,6 @@ class_name WeaponData
 @export var attack_cooldown: float
 @export var ability_cooldown: float
 
-@export_group("Attack Hitbox")
-@export var attack_shape: Shape2D
-@export var attack_offset: Vector2
-
 
 func execute_attack(_player: CharacterBody2D):
 	pass
@@ -27,7 +23,8 @@ func execute_ability(_player: CharacterBody2D):
 func weapon_state_change(_player: CharacterBody2D):
 	pass
 
-func on_weapon_hit(_player: CharacterBody2D, _body: Node2D):
+func weapon_collision(_player: CharacterBody2D, _bodies: Array[Node2D]):
 	pass
+	
 	
 	

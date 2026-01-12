@@ -1,10 +1,21 @@
-[gd_resource type="Resource" script_class="PencilData" load_steps=2 format=3 uid="uid://dhqjxp4nvjvpu"]
+[gd_resource type="Resource" script_class="PencilData" load_steps=4 format=3 uid="uid://dhqjxp4nvjvpu"]
 
 [ext_resource type="Script" uid="uid://blm75f3tw4jum" path="res://scripts/weapon-data/pencil-data.gd" id="1_rnu1i"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnu1i"]
+size = Vector2(163, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3cdn"]
+size = Vector2(192, 30)
+
 [resource]
 script = ExtResource("1_rnu1i")
+attack_knockback = 1000.0
+attack_shape = SubResource("RectangleShape2D_q3cdn")
+attack_offset = Vector2(95, 0)
 dash_speed = 4000.0
+ability_shape = SubResource("RectangleShape2D_rnu1i")
+ability_offset = Vector2(80, 0)
 name = "Pencil"
 animations = {
 "ability": "pencil_ability",

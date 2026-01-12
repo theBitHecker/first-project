@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=39 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Script" uid="uid://bpfd25flgxvvg" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bncaqy7p3i8jq" path="res://sprites/player/walking/pixil-frame-1.png" id="3_1jxqw"]
@@ -217,9 +217,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dw050"]
-size = Vector2(192, 30)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jxqw"]
 size = Vector2(94.5, 76)
 
@@ -240,17 +237,12 @@ position = Vector2(100, 0)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_b26j0")
-animation = &"pencil_attack"
-frame = 2
-frame_progress = 0.5284586
+animation = &"pencil_idle"
 
 [node name="Area2D" type="Area2D" parent="Weapon"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/Area2D"]
-position = Vector2(95, 0)
-shape = SubResource("RectangleShape2D_dw050")
+position = Vector2(80, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1jxqw")
-
-[connection signal="body_entered" from="Weapon/Area2D" to="." method="_on_weapon_hitbox_entered"]
