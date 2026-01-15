@@ -70,3 +70,4 @@ texture_progress_offset = Vector2(60, 15)
 script = ExtResource("11_ya4ey")
 
 [node name="Hallway" parent="." instance=ExtResource("12_eb6dy")]
+scale = Vector2(1, 1)
