@@ -51,32 +51,36 @@ func generate_maze_list(start_pos: Vector2i):
 			cell_stack.append(next_cell)
 		else:
 			cell_stack.pop_back()
+	print(grid[0])
+	print(grid[1])
+	print(grid[2])
+	print(grid[3])
+	print(grid[4])
 	return grid
 			
 		
 func instantiate_maze(grid: Array, start_pos: Vector2i, end_pos: Vector2i):
 	var instantiated_grid = []
-	for x in grid_height:
+	for x in grid_width:
 		instantiated_grid.append([])
-		for y in grid_width:
+		for y in grid_height:
 			
-			var coord = Vector2i(x, y)
 			var cell_instance: Node2D = null
-			if coord == start_pos:
-				cell_instance = rooms['start_stair'].instantiate()
-			elif coord == end_pos:
-				cell_instance = rooms['end_stair'].instantiate()
-			else:
-				cell_instance = rooms['hallway'].instantiate()
-			
+			#if coord == start_pos:
+				#cell_instance = rooms['start_stair'].instantiate()
+			#elif coord == end_pos:
+				#cell_instance = rooms['end_stair'].instantiate()
+			#else:
+				#cell_instance = rooms['hallway'].instantiate()
+			cell_instance = rooms['hallway'].instantiate()
 			if cell_instance.has_method("set_doors"):
 				cell_instance.set_doors(grid[x][y])
 			
-			cell_instance.position = Vector2(x * 1500, y * 1500)
+			cell_instance.position = Vector2(x*1500, y*1500)
 			
 			instantiated_grid[x].append(cell_instance)
 			add_child(cell_instance)
 			
 
 func _ready():
-	instantiate_maze(generate_maze_list(Vector2i(4, 0)), Vector2i(4, 0), Vector2i(0, 4))
+	instantiate_maze(generate_maze_list(Vector2i(0, 0)), Vector2i(0, 0), Vector2i(4, 4))

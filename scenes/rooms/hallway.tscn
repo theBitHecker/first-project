@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://c1sx5wrjrhc6l"]
 
 [ext_resource type="Texture2D" uid="uid://dmd8aaqvcmb8a" path="res://sprites/rooms/hallway/hallway-body.png" id="1_lbtni"]
-[ext_resource type="Script" uid="uid://dd5kwri3f3xan" path="res://scenes/rooms/hallway.gd" id="1_mowoc"]
+[ext_resource type="Script" uid="uid://dd5kwri3f3xan" path="res://scripts/rooms/hallway.gd" id="1_mowoc"]
 [ext_resource type="Texture2D" uid="uid://b0ggrfs50gcwk" path="res://sprites/rooms/hallway/hallway-up.png" id="2_vl156"]
 [ext_resource type="Texture2D" uid="uid://c6hvujlvve7xt" path="res://sprites/rooms/hallway/hallway-right.png" id="3_mowoc"]
 [ext_resource type="Texture2D" uid="uid://c14a1rgx6tv3w" path="res://sprites/rooms/hallway/hallway-down.png" id="4_frs0p"]

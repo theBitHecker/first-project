@@ -40,7 +40,6 @@ func weapon_state_change(player: CharacterBody2D):
 		player.weapon_state = player.weapon_states.IDLE
 		player.get_node("Weapon/Area2D/CollisionShape2D").set_deferred("shape", null)
 func weapon_collision(player: CharacterBody2D, bodies: Array[Node2D]):
-	print(hit_list)
 	for body in bodies:
 		if player.weapon_state == player.weapon_states.ATTACK:
 			if body.is_in_group("Enemy"):

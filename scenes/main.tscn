@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://becgdypu0jdt"]
+[gd_scene load_steps=12 format=3 uid="uid://becgdypu0jdt"]
 
 [ext_resource type="Script" uid="uid://cvhl0baof2aa4" path="res://scripts/camera.gd" id="1_85g3d"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://scenes/player.tscn" id="2_choun"]
@@ -11,20 +11,20 @@
 [ext_resource type="Texture2D" uid="uid://cf6esj8yenold" path="res://sprites/ui/health-bar-progress.png" id="9_muem4"]
 [ext_resource type="PackedScene" uid="uid://bt5ndy0yxrky3" path="res://scenes/enemies/hw-spooder.tscn" id="10_choun"]
 [ext_resource type="Script" uid="uid://bpr257i7vtib4" path="res://scripts/room-maker.gd" id="11_ya4ey"]
-[ext_resource type="PackedScene" uid="uid://c1sx5wrjrhc6l" path="res://scenes/rooms/hallway.tscn" id="12_eb6dy"]
 
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = -2
-zoom = Vector2(0.65, 0.65)
+position = Vector2(3750, 3750)
+zoom = Vector2(0.05, 0.05)
 position_smoothing_enabled = true
 script = ExtResource("1_85g3d")
 
 [node name="Player" parent="." node_paths=PackedStringArray("mana_bar", "health_bar") instance=ExtResource("2_choun")]
 z_index = 1
-position = Vector2(750, -750)
+position = Vector2(750, 750)
 weapons = {
 &"Pencil": ExtResource("3_ya4ey")
 }
@@ -70,5 +70,3 @@ texture_progress_offset = Vector2(60, 15)
 
 [node name="Rooms" type="Node2D" parent="."]
 script = ExtResource("11_ya4ey")
-
-[node name="Hallway" parent="Rooms" instance=ExtResource("12_eb6dy")]
