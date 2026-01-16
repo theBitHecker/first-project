@@ -24,6 +24,7 @@ script = ExtResource("1_85g3d")
 
 [node name="Player" parent="." node_paths=PackedStringArray("mana_bar", "health_bar") instance=ExtResource("2_choun")]
 z_index = 1
+position = Vector2(750, -750)
 weapons = {
 &"Pencil": ExtResource("3_ya4ey")
 }
@@ -34,6 +35,7 @@ health_bar = NodePath("../UILayer/HealthBar")
 position = Vector2(-195, 4)
 
 [node name="RandomBackground" type="Sprite2D" parent="."]
+visible = false
 z_index = -1
 texture = ExtResource("5_trceg")
 
@@ -69,5 +71,4 @@ texture_progress_offset = Vector2(60, 15)
 [node name="Rooms" type="Node2D" parent="."]
 script = ExtResource("11_ya4ey")
 
-[node name="Hallway" parent="." instance=ExtResource("12_eb6dy")]
-scale = Vector2(1, 1)
+[node name="Hallway" parent="Rooms" instance=ExtResource("12_eb6dy")]
