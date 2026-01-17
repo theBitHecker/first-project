@@ -26,28 +26,26 @@ size = Vector2(310, 125)
 script = ExtResource("1_mowoc")
 
 [node name="Hallway Body" type="Sprite2D" parent="."]
-position = Vector2(750, -750)
 scale = Vector2(2, 2)
 texture = ExtResource("1_lbtni")
 
 [node name="On 1" type="CollisionShape2D" parent="."]
-position = Vector2(310, -1190)
+position = Vector2(-440, -440)
 shape = SubResource("RectangleShape2D_vvysf")
 
 [node name="On 2" type="CollisionShape2D" parent="."]
-position = Vector2(1190, -1190)
+position = Vector2(440, -440)
 shape = SubResource("RectangleShape2D_vvysf")
 
 [node name="On 3" type="CollisionShape2D" parent="."]
-position = Vector2(1190, -310)
+position = Vector2(440, 440)
 shape = SubResource("RectangleShape2D_vvysf")
 
 [node name="On 4" type="CollisionShape2D" parent="."]
-position = Vector2(310, -310)
+position = Vector2(-440, 440)
 shape = SubResource("RectangleShape2D_vvysf")
 
 [node name="Up" type="StaticBody2D" parent="."]
-position = Vector2(750, -750)
 scale = Vector2(2, 2)
 
 [node name="Up" type="Sprite2D" parent="Up"]
@@ -59,7 +57,6 @@ shape = SubResource("RectangleShape2D_yb0pa")
 disabled = true
 
 [node name="Right" type="StaticBody2D" parent="."]
-position = Vector2(750, -750)
 scale = Vector2(2, 2)
 
 [node name="Right" type="Sprite2D" parent="Right"]
@@ -71,7 +68,6 @@ shape = SubResource("RectangleShape2D_5bqyt")
 disabled = true
 
 [node name="Down" type="StaticBody2D" parent="."]
-position = Vector2(750, -750)
 scale = Vector2(2, 2)
 
 [node name="Down" type="Sprite2D" parent="Down"]
@@ -83,7 +79,6 @@ shape = SubResource("RectangleShape2D_jrtjp")
 disabled = true
 
 [node name="Left" type="StaticBody2D" parent="."]
-position = Vector2(750, -750)
 scale = Vector2(2, 2)
 
 [node name="Left" type="Sprite2D" parent="Left"]

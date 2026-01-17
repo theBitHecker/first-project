@@ -51,11 +51,27 @@ func generate_maze_list(start_pos: Vector2i):
 			cell_stack.append(next_cell)
 		else:
 			cell_stack.pop_back()
-	print(grid[0])
-	print(grid[1])
-	print(grid[2])
-	print(grid[3])
-	print(grid[4])
+			
+	# remove dead ends
+	for x in grid_width:
+		for y in grid_height:
+
+			if grid[x][y].count(true) == 1:
+				var closed_doors = []
+				
+				for i in 4:
+					var neighbor = Vector2i(x, y) + directions[i]
+					
+					if neighbor.x in range(grid_width) and neighbor.y in range(grid_height):
+						if not grid[x][y][i]:
+							closed_doors.append(i)
+				
+				if not closed_doors.is_empty():
+					var dir_to_open = closed_doors.pick_random()
+					var neighbor = Vector2i(x, y) + directions[dir_to_open]
+					
+					grid[x][y][dir_to_open] = true
+					grid[neighbor.x][neighbor.y][(dir_to_open + 2) % 4] = true
 	return grid
 			
 		
@@ -66,13 +82,13 @@ func instantiate_maze(grid: Array, start_pos: Vector2i, end_pos: Vector2i):
 		for y in grid_height:
 			
 			var cell_instance: Node2D = null
-			#if coord == start_pos:
-				#cell_instance = rooms['start_stair'].instantiate()
-			#elif coord == end_pos:
-				#cell_instance = rooms['end_stair'].instantiate()
-			#else:
-				#cell_instance = rooms['hallway'].instantiate()
-			cell_instance = rooms['hallway'].instantiate()
+			if Vector2i(x, y) == start_pos:
+				cell_instance = rooms['start_stair'].instantiate()
+			elif Vector2i(x, y) == end_pos:
+				cell_instance = rooms['end_stair'].instantiate()
+			else:
+				cell_instance = rooms['hallway'].instantiate()
+
 			if cell_instance.has_method("set_doors"):
 				cell_instance.set_doors(grid[x][y])
 			

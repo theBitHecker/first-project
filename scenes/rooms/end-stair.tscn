@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bngoaf5nm1x4a"]
+[gd_scene load_steps=12 format=3 uid="uid://bngoaf5nm1x4a"]
 
+[ext_resource type="Script" uid="uid://c1shkoa1b7d6j" path="res://scripts/rooms/end_stair.gd" id="1_i70lt"]
 [ext_resource type="Texture2D" uid="uid://c6fx8a7q0ybh3" path="res://sprites/rooms/end-stair/end-stair-body.png" id="1_pxejw"]
 [ext_resource type="Texture2D" uid="uid://ixafo8v2nqpj" path="res://sprites/rooms/end-stair/end-stair-up.png" id="2_i70lt"]
 [ext_resource type="Texture2D" uid="uid://t7i0jhhh5qw7" path="res://sprites/rooms/end-stair/end-stair-right.png" id="3_vemim"]
@@ -22,77 +23,72 @@ size = Vector2(125, 130)
 size = Vector2(125, 125)
 
 [node name="End Stair" type="StaticBody2D"]
-scale = Vector2(2, 2)
+script = ExtResource("1_i70lt")
 
 [node name="End Stair Body" type="Sprite2D" parent="."]
-position = Vector2(750, -750)
 scale = Vector2(2, 2)
 texture = ExtResource("1_pxejw")
 
 [node name="On 1" type="CollisionPolygon2D" parent="."]
-position = Vector2(533.25, -1047.875)
+position = Vector2(-216.75, -297.875)
 polygon = PackedVector2Array(-533.25, 167.875, -283.25, 167.875, -283.25, -202.125, 86.75, -202.125, 86.75, -452.125, -533.25, -452.125)
 
 [node name="On 2" type="CollisionPolygon2D" parent="."]
-position = Vector2(533.25, -1047.875)
+position = Vector2(-216.25, -297.875)
 polygon = PackedVector2Array(336.75, -452.125, 336.75, -202.125, 706.75, -202.125, 706.75, 167.875, 966.75, 167.875, 966.75, -452.125)
 
 [node name="On 3" type="CollisionPolygon2D" parent="."]
-position = Vector2(533.25, -1047.875)
+position = Vector2(-216.25, -297.875)
 polygon = PackedVector2Array(706.75, 417.875, 966.75, 417.875, 966.75, 1047.875, 336.75, 1047.875, 336.75, 787.875, 706.75, 787.875)
 
 [node name="On 4" type="CollisionPolygon2D" parent="."]
-position = Vector2(533.25, -1047.875)
+position = Vector2(-216.75, -297.875)
 polygon = PackedVector2Array(-533.25, 417.875, -283.25, 417.875, -283.25, 787.875, 86.75, 787.875, 86.75, 1047.875, -533.25, 1047.875)
 
 [node name="On 5" type="CollisionShape2D" parent="."]
-position = Vector2(745, -780)
+position = Vector2(-5, -30)
 shape = SubResource("RectangleShape2D_njouq")
 
-[node name="End Stair Up" type="StaticBody2D" parent="."]
-position = Vector2(750, -750)
+[node name="Up" type="StaticBody2D" parent="."]
 scale = Vector2(2, 2)
 
-[node name="End Stair Up" type="Sprite2D" parent="End Stair Up"]
+[node name="Up" type="Sprite2D" parent="Up"]
 texture = ExtResource("2_i70lt")
 
-[node name="Off 1" type="CollisionShape2D" parent="End Stair Up"]
+[node name="Off 1" type="CollisionShape2D" parent="Up"]
 position = Vector2(-2.5, -312.5)
 shape = SubResource("RectangleShape2D_yb0pa")
 disabled = true
 
-[node name="End Stair Right" type="StaticBody2D" parent="."]
-position = Vector2(750, -750)
+[node name="Right" type="StaticBody2D" parent="."]
 scale = Vector2(2, 2)
 
-[node name="End Stair Right" type="Sprite2D" parent="End Stair Right"]
+[node name="Right" type="Sprite2D" parent="Right"]
 texture = ExtResource("3_vemim")
 
-[node name="Off 1" type="CollisionShape2D" parent="End Stair Right"]
+[node name="Off 1" type="CollisionShape2D" parent="Right"]
 position = Vector2(310, -2.5)
 shape = SubResource("RectangleShape2D_5bqyt")
 disabled = true
 
-[node name="End Stair Down" type="StaticBody2D" parent="."]
-position = Vector2(750, -750)
+[node name="Down" type="StaticBody2D" parent="."]
 scale = Vector2(2, 2)
 
-[node name="End Stair Down" type="Sprite2D" parent="End Stair Down"]
+[node name="Down" type="Sprite2D" parent="Down"]
 texture = ExtResource("4_shyuf")
 
-[node name="Off 1" type="CollisionShape2D" parent="End Stair Down"]
+[node name="Off 1" type="CollisionShape2D" parent="Down"]
 position = Vector2(-2.5, 310)
 shape = SubResource("RectangleShape2D_jrtjp")
 disabled = true
 
-[node name="End Stair Left" type="StaticBody2D" parent="."]
-position = Vector2(750, -750)
+[node name="Left" type="StaticBody2D" parent="."]
 scale = Vector2(2, 2)
 
-[node name="End Stair Left" type="Sprite2D" parent="End Stair Left"]
+[node name="Left" type="Sprite2D" parent="Left"]
 texture = ExtResource("5_jpypt")
 
-[node name="Off 1" type="CollisionShape2D" parent="End Stair Left"]
+[node name="Off 1" type="CollisionShape2D" parent="Left"]
 position = Vector2(-312.5, -2.5)
 shape = SubResource("RectangleShape2D_qovxd")
 disabled = true

@@ -18,13 +18,12 @@ y_sort_enabled = true
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = -2
 position = Vector2(3750, 3750)
-zoom = Vector2(0.05, 0.05)
+zoom = Vector2(0.1, 0.1)
 position_smoothing_enabled = true
 script = ExtResource("1_85g3d")
 
 [node name="Player" parent="." node_paths=PackedStringArray("mana_bar", "health_bar") instance=ExtResource("2_choun")]
 z_index = 1
-position = Vector2(750, 750)
 weapons = {
 &"Pencil": ExtResource("3_ya4ey")
 }
