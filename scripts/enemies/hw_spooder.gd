@@ -4,7 +4,7 @@ var speed = 1000
 var speed_limit = 500
 var max_health = 50
 var health = max_health
-
+var cooldown = 0
 var chase_target = null
 func _physics_process(delta: float) -> void:
 	if chase_target:
@@ -14,6 +14,14 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite2D.play("walk")
 	else:
 		$AnimatedSprite2D.play("idle")
+	
+	for body in $"Attack Hitbox".get_overlapping_bodies():
+		if body.is_in_group("Player"):
+			if cooldown <= 0:
+				body.health -= 10
+				cooldown = 1
+	if cooldown > 0:
+		cooldown -= delta
 		
 	if health <= 0:
 		self.queue_free()

@@ -91,7 +91,7 @@ func instantiate_maze(grid: Array, start_pos: Vector2i, end_pos: Vector2i):
 				cell_instance = rooms['hallway'].instantiate()
 
 			if cell_instance.has_method("set_doors"):
-				cell_instance.set_doors(grid[x][y])
+				cell_instance.set_doors(grid[x][y], Vector2i(x, y))
 			
 			cell_instance.position = Vector2(x*1500, y*1500)
 			
@@ -103,4 +103,8 @@ func _ready():
 	instantiate_maze(generate_maze_list(Vector2i(0, 0)), Vector2i(0, 0), Vector2i(4, 4))
 	
 func end_level(end_stair):
-	start_pos = Vector2i()
+	var start_pos = end_stair.room_position
+	print(start_pos)
+	for room in get_children():
+		room.queue_free()
+	instantiate_maze(generate_maze_list(start_pos), start_pos, Vector2i(randi() % 4, randi() % 4))
