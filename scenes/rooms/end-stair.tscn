@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bngoaf5nm1x4a"]
+[gd_scene load_steps=13 format=3 uid="uid://bngoaf5nm1x4a"]
 
 [ext_resource type="Script" uid="uid://c1shkoa1b7d6j" path="res://scripts/rooms/end_stair.gd" id="1_i70lt"]
 [ext_resource type="Texture2D" uid="uid://c6fx8a7q0ybh3" path="res://sprites/rooms/end-stair/end-stair-body.png" id="1_pxejw"]
@@ -21,6 +21,9 @@ size = Vector2(125, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qovxd"]
 size = Vector2(125, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i70lt"]
+size = Vector2(290, 50)
 
 [node name="End Stair" type="StaticBody2D"]
 script = ExtResource("1_i70lt")
@@ -92,3 +95,11 @@ texture = ExtResource("5_jpypt")
 position = Vector2(-312.5, -2.5)
 shape = SubResource("RectangleShape2D_qovxd")
 disabled = true
+
+[node name="end hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="end hitbox"]
+position = Vector2(-5, -275)
+shape = SubResource("RectangleShape2D_i70lt")
+
+[connection signal="body_entered" from="end hitbox" to="." method="_on_body_touch_end"]

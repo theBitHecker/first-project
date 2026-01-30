@@ -3,6 +3,7 @@ extends Node2D
 var grid_width = 5
 var grid_height = 5
 
+
 var rooms = {
 	'hallway': preload("res://scenes/rooms/hallway.tscn"),
 	'start_stair': preload("res://scenes/rooms/start-stair.tscn"),
@@ -100,3 +101,6 @@ func instantiate_maze(grid: Array, start_pos: Vector2i, end_pos: Vector2i):
 
 func _ready():
 	instantiate_maze(generate_maze_list(Vector2i(0, 0)), Vector2i(0, 0), Vector2i(4, 4))
+	
+func end_level(end_stair):
+	start_pos = Vector2i()

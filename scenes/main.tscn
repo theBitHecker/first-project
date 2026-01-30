@@ -18,7 +18,7 @@ y_sort_enabled = true
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = -2
 position = Vector2(3750, 3750)
-zoom = Vector2(0.1, 0.1)
+zoom = Vector2(0.9, 0.9)
 position_smoothing_enabled = true
 script = ExtResource("1_85g3d")
 
@@ -66,6 +66,7 @@ texture_progress = ExtResource("9_muem4")
 texture_progress_offset = Vector2(60, 15)
 
 [node name="HW Spooder" parent="." instance=ExtResource("10_choun")]
+position = Vector2(183, 0)
 
 [node name="Rooms" type="Node2D" parent="."]
 script = ExtResource("11_ya4ey")
