@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bt5ndy0yxrky3"]
+[gd_scene load_steps=13 format=3 uid="uid://bt5ndy0yxrky3"]
 
 [ext_resource type="Script" uid="uid://dfomxnxo2glfd" path="res://scripts/enemies/hw_spooder.gd" id="1_1pna3"]
 [ext_resource type="Texture2D" uid="uid://cgj0cxl0p3n2b" path="res://sprites/enemies/hw-spooder/idle/hw-spooder-idle-0.png" id="1_l3pds"]
@@ -46,14 +46,37 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pna3"]
+radius = 400.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k24jl"]
+size = Vector2(25, 55)
+
 [node name="HW Spooder" type="CharacterBody2D" groups=["Enemy"]]
 platform_floor_layers = 4294967040
 script = ExtResource("1_1pna3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, -4.5)
+position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_l3pds")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 3
+position = Vector2(1, 5)
 sprite_frames = SubResource("SpriteFrames_4mt5m")
 animation = &"walk"
+
+[node name="Aggression Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aggression Hitbox"]
+position = Vector2(1, 17)
+shape = SubResource("CircleShape2D_1pna3")
+
+[node name="Attack Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Hitbox"]
+position = Vector2(55.5, 0)
+shape = SubResource("RectangleShape2D_k24jl")
+
+[connection signal="body_entered" from="Aggression Hitbox" to="." method="_on_aggression"]
+[connection signal="body_exited" from="Aggression Hitbox" to="." method="_on_aggression_stop"]

@@ -10,12 +10,16 @@ size = Vector2(192, 30)
 
 [resource]
 script = ExtResource("1_rnu1i")
-attack_knockback = 1000.0
 attack_shape = SubResource("RectangleShape2D_q3cdn")
 attack_offset = Vector2(95, 0)
-dash_speed = 4000.0
+attack_damage = 5.0
+attack_knockback = 1000.0
 ability_shape = SubResource("RectangleShape2D_rnu1i")
 ability_offset = Vector2(80, 0)
+ability_damage = 15.0
+dash_speed = 4000.0
+knockback_multiplier = 1.25
+minimum_knockback = 1000.0
 name = "Pencil"
 animations = {
 "ability": "pencil_ability",
