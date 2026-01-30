@@ -4,8 +4,8 @@ extends CharacterBody2D
 
 # Stats (Weapon-Dynamic)
 var move_speed = 1600
-var speed_limit = 400
-var drag = 0.9
+var speed_limit = 1000
+var drag = 0.95
 var max_health = 100
 var max_mana = 100
 var mana_recharge = 10
@@ -50,9 +50,9 @@ func _physics_process(delta: float) -> void:
 	# Movement
 	var movement_control_vector = Input.get_vector("Move Left", "Move Right", "Move Up", "Move Down")
 	velocity += movement_control_vector*move_speed*delta
-	if not (get_global_mouse_position() - $"../Camera2D".position).is_zero_approx():
+	if not (get_global_mouse_position() - get_viewport().get_camera_2d().position).is_zero_approx():
 		if not(weapon_state == weapon_states.ABILITY and selected_weapon.name == "Pencil"):
-			attack_control_vector = (get_global_mouse_position() - $"../Camera2D".position).normalized()
+			attack_control_vector = (get_global_mouse_position() - get_viewport().get_camera_2d().get_screen_center_position()).normalized()
 	
 	# Abilities
 	
